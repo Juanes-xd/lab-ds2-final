@@ -1,0 +1,29 @@
+name: lab-ds2-final
+
+on:
+  push:
+    branches:
+    - master
+jobs:
+  check-bats-version:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v3
+      - uses: actions/setup-node@v3
+      
+      - name: Run apt get
+        run: sudo apt-get update
+      - name: Run apt upgrade
+        run: sudo apt-get upgrade  
+      - name: Install Dependencies
+        run: npm install
+      - name: Run tests
+        run: npm test  
+      - uses: yonycalsin/deploy-simple-to-heroku@v2.0.1
+        with:
+    # This will be used for authentication. You can find it in your heroku homepage account settings
+         heroku_api_key: 59fc9bcf-efb8-4233-ba90-48a4ee51dd37
+    # Email that you use with heroku
+         heroku_email: "juanestebanortizbejarano@gmail.com"
+    # The appname to use for deploying/updating
+         heroku_app_name: "lab-ds2-final"
